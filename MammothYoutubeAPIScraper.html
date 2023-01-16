@@ -1,4 +1,8 @@
-<!doctype html><html><head></head><body>
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
 	<section id="search">
 		<h1>Use YouTube API</h1>
 
@@ -6,14 +10,14 @@
 		<input type="text" id="query"/>
 		<button id="searchButton">Search</button>
 	</section>
-	<br/><br/><br/>
+	<br/>
 
 	<section id="results">
-		Results:
+		<h2>Results:</h2>
 	</section>
 
 
-</body>
+  </body>
 <script type="text/javascript">
 const apiKey = "AIzaSyB585xqDUxWY8BacNItSyuMdrULPiMfh-Y";
 const searchButton = document.getElementById("searchButton");
@@ -30,14 +34,13 @@ searchButton.addEventListener("click", (evt)=> {
   // Removes previous search results from the screen
   resultsSection.innerHTML=`<h2>Results:</h2>`;
 
-  console.log(url);
-
   fetch(url)
     .then(response => response.json())
     .then((results)=> {
       
       results.items.forEach(item => {
-        console.log(item);
+        
+	// If the results are a video, use this formatting     
         if(item.id.videoId != undefined){
           const link = `https://www.youtube.com/watch?v=${item.id.videoId}`;
           
@@ -45,18 +48,27 @@ searchButton.addEventListener("click", (evt)=> {
           resultsSection.innerHTML += `<img src="${item.snippet.thumbnails.high.url}" />`;
           resultsSection.innerHTML += `<p>${item.snippet.description}</p>`;
         }
+	
+	// If the results are a channel, use this formatting
         if(item.id.channelId != undefined) {
           const channelLink = `https://www.youtube.com/channel/${item.id.channelId}`;
 
           resultsSection.innerHTML += `<a href="${channelLink}"><h3>Channel: ${item.snippet.title}</h3></a>`;
           resultsSection.innerHTML += `<img src="${item.snippet.thumbnails.medium.url}" />`;
           resultsSection.innerHTML += `<p>${item.snippet.description}</p>`;
+        }
+	
+	// If the results are a playlist, use this formatting
+        if (item.id.kind === "youtube#playlist" && item.id.playlistId != undefined) {
+          const playlistLink = `https://www.youtube.com/playlist?list=${item.id.playlistId}`;
 
+          resultsSection.innerHTML += `<a href="${playlistLink}"><h3>Playlist: ${item.snippet.title}</h3></a>`;
+          resultsSection.innerHTML += `<img src="${item.snippet.thumbnails.high.url}" />`;
+          resultsSection.innerHTML += `<p>${item.snippet.description}</p>`;
         }
       })
-
-
     })
+
     // Removes the text from the search box 
     qbox.value="";
 });
