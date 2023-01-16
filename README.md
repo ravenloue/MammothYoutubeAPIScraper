@@ -46,6 +46,7 @@ Many thanks to Mammoth Interactive for their tutorial for this process. Up until
 
 - January 16, 2023
   - I finished the tutorial. I added on the ability for the search to populate channels. The next step is to get playlists to work. 
+  - Added support for playlists
 
 ### Useful resources
 
