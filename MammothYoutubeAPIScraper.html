@@ -1,0 +1,64 @@
+<!doctype html><html><head></head><body>
+	<section id="search">
+		<h1>Use YouTube API</h1>
+
+		<label for="query">Search on YouTube</label>
+		<input type="text" id="query"/>
+		<button id="searchButton">Search</button>
+	</section>
+	<br/><br/><br/>
+
+	<section id="results">
+		Results:
+	</section>
+
+
+</body>
+<script type="text/javascript">
+const apiKey = "AIzaSyB585xqDUxWY8BacNItSyuMdrULPiMfh-Y";
+const searchButton = document.getElementById("searchButton");
+const googleAPIUrl = "https://www.googleapis.com/youtube/v3/search/"
+const resultsSection = document.getElementById("results");
+const qbox = document.getElementById("query");
+
+searchButton.addEventListener("click", (evt)=> {
+  const apiPrefix = "&key="
+  const searchTerm=document.getElementById("query").value;
+  const searchQuery = "?part=snippet&q="+ searchTerm + apiPrefix + apiKey;
+  const url=googleAPIUrl+searchQuery;
+
+  // Removes previous search results from the screen
+  resultsSection.innerHTML=`<h2>Results:</h2>`;
+
+  console.log(url);
+
+  fetch(url)
+    .then(response => response.json())
+    .then((results)=> {
+      
+      results.items.forEach(item => {
+        console.log(item);
+        if(item.id.videoId != undefined){
+          const link = `https://www.youtube.com/watch?v=${item.id.videoId}`;
+          
+          resultsSection.innerHTML += `<a href="${link}"><h3>Video: ${item.snippet.title}</h3></a>`;
+          resultsSection.innerHTML += `<img src="${item.snippet.thumbnails.high.url}" />`;
+          resultsSection.innerHTML += `<p>${item.snippet.description}</p>`;
+        }
+        if(item.id.channelId != undefined) {
+          const channelLink = `https://www.youtube.com/channel/${item.id.channelId}`;
+
+          resultsSection.innerHTML += `<a href="${channelLink}"><h3>Channel: ${item.snippet.title}</h3></a>`;
+          resultsSection.innerHTML += `<img src="${item.snippet.thumbnails.medium.url}" />`;
+          resultsSection.innerHTML += `<p>${item.snippet.description}</p>`;
+
+        }
+      })
+
+
+    })
+    // Removes the text from the search box 
+    qbox.value="";
+});
+</script>
+</body><html>
