@@ -5,14 +5,13 @@ Very simple Youtube API Scraper from a tutorial by Mammoth Interactive
 
 - [Overview](#overview)
   - [The Idea](#the-idea)
-  - [Screenshots](#screenshots)
+  - [Screenshot](#screenshot)
 - [My Process](#my-process)
   - [Built With](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -27,7 +26,8 @@ This is a pretty simple YouTube API scraper that will grab links, thumbnails and
 
 ### Screenshot
 
-Not available at this time
+![YoutubeScraper](https://github.com/ravenloue/MammothYoutubeAPIScraper/blob/main/YoutubeScraperScreenshot.png)
+[Link to Active deployment](https://ravenloue.github.io/MammothYoutubeAPIScraper/MammothYoutubeAPIScraper.html)
 
 ## My process
 
@@ -43,10 +43,12 @@ Not available at this time
 Many thanks to Mammoth Interactive for their tutorial for this process. Up until now I hadn't really handled APIs at all, and now I feel at least confident with the YouTube API. I want to find more ways to be able to utilize this and other APIs in the future. 
 
 ### Continued development
-
-- January 16, 2023
-  - I finished the tutorial. I added on the ability for the search to populate channels. The next step is to get playlists to work. 
-  - Added support for playlists
+- 2023
+  - January 20
+    - Added Screencap and link to active deployment. Also fixed links in the readme
+  - January 16
+    - I finished the tutorial. I added on the ability for the search to populate channels. The next step is to get playlists to work. 
+    - Added support for playlists
 
 ### Useful resources
 
